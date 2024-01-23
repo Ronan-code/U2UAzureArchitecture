@@ -69,6 +69,8 @@ jobs:
 
   WebApp-Job:
     runs-on: ubuntu-latest
+    needs: [RG-Job]
+    
     env:
       AZURE_WEBAPP_NAME: ronansmits123-mywebapp
 
@@ -99,9 +101,9 @@ jobs:
       - name: Azure WebApp
         uses: Azure/webapps-deploy@v2
         with:
-          app-name: ${{ steps.deploywebapp.outputs.webappname }}
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
           package: ${{ runner.temp }}/publish
 
           
-    needs: [RG-Job]
+    
     
